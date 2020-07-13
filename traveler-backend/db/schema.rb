@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_201849) do
+ActiveRecord::Schema.define(version: 2020_07_13_204059) do
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.string "must_see"
+    t.boolean "visited"
+    t.integer "country_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "countries", force: :cascade do |t|
     t.string "name"
