@@ -21,3 +21,7 @@ function getCountries(){
      })
 }
 
+function clearForm(){
+    const countryFormDiv = document.getElementById('country-form')
+    countryFormDiv.innerHTML = ""
+}
