@@ -3,9 +3,9 @@ class CitiesController < ApplicationController
 
   # GET /cities
   def index
-    @cities = City.all
+    cities = City.all
 
-    render json: @cities
+    render json: cities
   end
 
   # GET /cities/1
@@ -15,12 +15,12 @@ class CitiesController < ApplicationController
 
   # POST /cities
   def create
-    @city = City.new(city_params)
+    city = City.new(city_params)
 
-    if @city.save
-      render json: @city, status: :created, location: @city
+    if city.save
+      render json: city, status: :created, location: city
     else
-      render json: @city.errors, status: :unprocessable_entity
+      render json: city.errors, status: :unprocessable_entity
     end
   end
 
@@ -31,11 +31,6 @@ class CitiesController < ApplicationController
     else
       render json: @city.errors, status: :unprocessable_entity
     end
-  end
-
-  # DELETE /cities/1
-  def destroy
-    @city.destroy
   end
 
   private
