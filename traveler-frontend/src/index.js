@@ -37,7 +37,17 @@ function addClickToLinks(){
 }
 
 function displayCountry(){
-
+    clearForm()
+    const id = event.target.dataset.id 
+    const main = document.getElementById('main')
+    main.innerHTML = ""
+    fetch(BASE_URL+"/countries/"+id)
+    .then(resp => resp.json())
+    .then(country => {
+        main.innerHTML += `
+            <h3>${country.name}</h3>
+        `
+    })
 }
 
 function displayCountryForm(){
