@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:3000'
 
-document.addEventListener('load', () => {
+window.addEventListener('load', () => {
     getCountries()
 })
 
@@ -24,4 +24,22 @@ function getCountries(){
 function clearForm(){
     const countryFormDiv = document.getElementById('country-form')
     countryFormDiv.innerHTML = ""
+}
+
+function addClickToLinks(){
+    const countriesLinks = document.querySelectorAll('li a')
+    countriesLinks.forEach(link => {
+        link.addEventListener('click', displayCountry)
+    })
+
+    document.getElementById('country-form').addEventListener('click', displayCountryForm)
+    document.getElementById('countries').addEventListener('click', getCountries)
+}
+
+function displayCountry(){
+
+}
+
+function displayCountryForm(){
+
 }
