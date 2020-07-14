@@ -32,7 +32,7 @@ function addClickToLinks(){
         link.addEventListener('click', displayCountry)
     })
 
-    document.getElementById('country-form').addEventListener('click', displayCountryForm)
+    document.getElementById('countryForm').addEventListener('click', displayCountryForm)
     document.getElementById('countries').addEventListener('click', getCountries)
 }
 
@@ -41,5 +41,18 @@ function displayCountry(){
 }
 
 function displayCountryForm(){
+    const countryFormDiv =  document.getElementById('country-form')
+    const html = `
+        <form>
+            <label>Name:</label>
+            <input type="text" id="name">
+            <input type="submit">
+        </form>
+    `
+    countryFormDiv.innerHTML = html 
+    document.querySelector('form').addEventListener('submit', createCountry)
+}
+
+function createCountry(){
 
 }
