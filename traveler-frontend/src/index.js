@@ -54,5 +54,26 @@ function displayCountryForm(){
 }
 
 function createCountry(){
-
+    event.preventDefault()
+    const country = {
+        name: document.getElementById('name').value
+    }
+    fetch(BASE_URL+"/countries", {
+        method: "POST",
+        body: JSON.stringify(country),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    .then(resp => resp.json())
+    .then(country => {
+        document.querySelector('#main').innerHTML += `
+        <li>
+        <a href="#" data-id="${country.id}">${country.name}</a>
+        </li>
+        `
+        addClickToLinks()
+        clearForm()
+    })
 }
