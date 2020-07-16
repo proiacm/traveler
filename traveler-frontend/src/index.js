@@ -13,13 +13,9 @@ function getCountries(){
      .then(resp => resp.json())
      .then(countries => {
          countries.forEach(country => {
-         const c = new Country(country)
-        showCountries.innerHTML += c.render 
-
-        const ul = document.querySelector(`li#country-${country.id} #cities`)
-            country.cities.forEach(city => {
-                ul.innerHTML += `<li>${city.name} - </li>`
-            })
+            const c = new Country(country)
+            showCountries.innerHTML += c.renderCountry() 
+            c.renderUL()
         })
 
          addClickToLinks()
@@ -112,13 +108,19 @@ class Country {
 
     renderCountry(){
         return `
-        <li id="country-${country.id}">
-            <a href="#" data-id="${country.id}">${country.name}</a>
+        <li id="country-${this.id}">
+            <a href="#" data-id="${this.id}">${this.name}</a>
             <ul id="cities">
             </ul>
         </li>
      `
     }
 
+    renderUL(){
+        const ul = document.querySelector(`li#country-${this.id} #cities`)
+            this.cities.forEach(city => {
+                ul.innerHTML += `<li>${city.name} - </li>`
+            })
+    }
 }
 
