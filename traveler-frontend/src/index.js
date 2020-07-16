@@ -1,14 +1,15 @@
 const BASE_URL = 'http://localhost:3000'
 
+//start program
 window.addEventListener('load', () => {
     getCountries()
 })
 
+//display list of all countries
 function getCountries(){
      clearForm()
      clearUL()
      const showCountries = document.querySelector('#show-countries ul')
-    //  showCountries.innerHTML = ""
      fetch(BASE_URL+"/countries")
      .then(resp => resp.json())
      .then(countries => {
@@ -43,21 +44,22 @@ function addClickToLinks(){
     document.getElementById('countries').addEventListener('click', getCountries)
 }
 
+// display instance of country
 function displayCountry(){
     clearForm()
     clearUL()
     const id = event.target.dataset.id 
-    const showCountries = document.getElementById('show-country')
-    showCountries.innerHTML = ""
+    const showCountry = document.getElementById('show-country')
     fetch(BASE_URL+"/countries/"+id)
     .then(resp => resp.json())
     .then(country => {
-        showCountries.innerHTML += `
-            <h3>${country.name}</h3>
-        `
+        const c = new Country(country)
+        showCountry.innerHTML += c.renderCountry() 
+        c.renderUL()
     })
 }
 
+// put form on page
 function displayCountryForm(){
     const countryFormDiv =  document.getElementById('country-form')
     const html = `
@@ -71,6 +73,7 @@ function displayCountryForm(){
     document.querySelector('form').addEventListener('submit', createCountry)
 }
 
+// creates instance of country from form
 function createCountry(){
     event.preventDefault()
     const country = {
@@ -96,7 +99,6 @@ function createCountry(){
 }
 
 // begin Country class
-
 class Country {
     constructor(country){
         this.id = country.id
@@ -121,4 +123,6 @@ class Country {
             })
     }
 }
+
+// begin City class
 
