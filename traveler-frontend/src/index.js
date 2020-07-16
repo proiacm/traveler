@@ -7,16 +7,26 @@ window.addEventListener('load', () => {
 function getCountries(){
      clearForm()
      clearUL()
-     const showCountries = document.querySelector('#show-countries')
-     showCountries.innerHTML = ""
+     const showCountries = document.querySelector('#show-countries ul')
+    //  showCountries.innerHTML = ""
      fetch(BASE_URL+"/countries")
      .then(resp => resp.json())
      .then(countries => {
-         showCountries.innerHTML += countries.map(country => `
-            <li>
+         countries.forEach(country => {
+         const li = `
+            <li id="country-${country.id}">
                 <a href="#" data-id="${country.id}">${country.name}</a>
+                <ul id="cities">
+                </ul>
             </li>
-         `).join('')
+         `
+        showCountries.innerHTML += li 
+
+        const ul = document.querySelector(`li#country-${country.id} #cities`)
+            country.cities.forEach(city => {
+                ul.innerHTML += `<li>${city.name} - </li>`
+            })
+        })
 
          addClickToLinks()
      })
@@ -30,7 +40,7 @@ function clearForm(){
 function clearUL(){
     const showCountries = document.querySelector('#show-countries ul')
     showCountries.innerHTML = ""
-    const showCountry = document.querySelector('#show-country ul')
+    const showCountry = document.querySelector('#show-country')
     showCountry.innerHTML = ""
 }
 
@@ -46,8 +56,9 @@ function addClickToLinks(){
 
 function displayCountry(){
     clearForm()
+    clearUL()
     const id = event.target.dataset.id 
-    const showCountries = document.getElementById('show-countries')
+    const showCountries = document.getElementById('show-country')
     showCountries.innerHTML = ""
     fetch(BASE_URL+"/countries/"+id)
     .then(resp => resp.json())
@@ -95,3 +106,8 @@ function createCountry(){
         clearForm()
     })
 }
+
+// begin Country class
+
+class 
+
