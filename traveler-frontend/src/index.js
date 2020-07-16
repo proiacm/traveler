@@ -6,12 +6,13 @@ window.addEventListener('load', () => {
 
 function getCountries(){
      clearForm()
-     const main = document.querySelector('#main')
-     main.innerHTML = ""
+     clearUL()
+     const showCountries = document.querySelector('#show-countries')
+     showCountries.innerHTML = ""
      fetch(BASE_URL+"/countries")
      .then(resp => resp.json())
      .then(countries => {
-         main.innerHTML += countries.map(country => `
+         showCountries.innerHTML += countries.map(country => `
             <li>
                 <a href="#" data-id="${country.id}">${country.name}</a>
             </li>
@@ -24,6 +25,13 @@ function getCountries(){
 function clearForm(){
     const countryFormDiv = document.getElementById('country-form')
     countryFormDiv.innerHTML = ""
+}
+
+function clearUL(){
+    const showCountries = document.querySelector('#show-countries ul')
+    showCountries.innerHTML = ""
+    const showCountry = document.querySelector('#show-country ul')
+    showCountry.innerHTML = ""
 }
 
 function addClickToLinks(){
@@ -39,12 +47,12 @@ function addClickToLinks(){
 function displayCountry(){
     clearForm()
     const id = event.target.dataset.id 
-    const main = document.getElementById('main')
-    main.innerHTML = ""
+    const showCountries = document.getElementById('show-countries')
+    showCountries.innerHTML = ""
     fetch(BASE_URL+"/countries/"+id)
     .then(resp => resp.json())
     .then(country => {
-        main.innerHTML += `
+        showCountries.innerHTML += `
             <h3>${country.name}</h3>
         `
     })
@@ -78,7 +86,7 @@ function createCountry(){
     })
     .then(resp => resp.json())
     .then(country => {
-        document.querySelector('#main').innerHTML += `
+        document.querySelector('#show-countries').innerHTML += `
         <li>
         <a href="#" data-id="${country.id}">${country.name}</a>
         </li>
