@@ -17,7 +17,6 @@ function getCountries(){
             showCountries.innerHTML += c.renderCountry() 
             c.renderUL()
         })
-
          addClickToLinks()
      })
 }
@@ -87,14 +86,13 @@ function createCountry(){
     })
     .then(resp => resp.json())
     .then(country => {
-        document.querySelector('#show-countries').innerHTML += `
-        <li>
-        <a href="#" data-id="${country.id}">${country.name}</a>
-        </li>
-        `
-        addClickToLinks()
-        clearForm()
-    })
+           const c = new Country(country)
+           const showCountries = document.querySelector('#show-countries ul')
+           showCountries.innerHTML += c.renderCountry() 
+           c.renderUL()
+           addClickToLinks()
+           clearForm()
+       })
 }
 
 // begin Country class
