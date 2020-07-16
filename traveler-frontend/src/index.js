@@ -13,14 +13,8 @@ function getCountries(){
      .then(resp => resp.json())
      .then(countries => {
          countries.forEach(country => {
-         const li = `
-            <li id="country-${country.id}">
-                <a href="#" data-id="${country.id}">${country.name}</a>
-                <ul id="cities">
-                </ul>
-            </li>
-         `
-        showCountries.innerHTML += li 
+         const c = new Country(country)
+        showCountries.innerHTML += c.render 
 
         const ul = document.querySelector(`li#country-${country.id} #cities`)
             country.cities.forEach(city => {
@@ -109,5 +103,22 @@ function createCountry(){
 
 // begin Country class
 
-class 
+class Country {
+    constructor(country){
+        this.id = country.id
+        this.name = country.name
+        this.cities = country.cities
+    }
+
+    renderCountry(){
+        return `
+        <li id="country-${country.id}">
+            <a href="#" data-id="${country.id}">${country.name}</a>
+            <ul id="cities">
+            </ul>
+        </li>
+     `
+    }
+
+}
 
