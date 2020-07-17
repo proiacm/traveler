@@ -57,9 +57,11 @@ function displayCountry(){
         showCountry.innerHTML += c.renderCountry() 
         c.renderUL()
     })
+    const btn = `<button>Add City</button>`
+    showCountry.innerHTML = btn.addEventListener('click', displayCityForm)
 }
 
-// put form on page
+// put country form on page
 function displayCountryForm(){
     const countryFormDiv =  document.getElementById('country-form')
     const html = `
@@ -71,6 +73,11 @@ function displayCountryForm(){
     `
     countryFormDiv.innerHTML = html 
     document.querySelector('form').addEventListener('submit', createCountry)
+}
+
+// put city form on page 
+function displayCityForm(){
+
 }
 
 // creates instance of country from form
@@ -96,6 +103,11 @@ function createCountry(){
            addClickToLinks()
            clearForm()
        })
+}
+
+// creates instance of city from form
+function createCity(){
+    
 }
 
 // begin Country class
