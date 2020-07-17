@@ -25,6 +25,8 @@ function getCountries(){
 function clearForm(){
     const countryFormDiv = document.getElementById('country-form')
     countryFormDiv.innerHTML = ""
+    const cityFormDiv = document.getElementById('city-form')
+    cityFormDiv.innerHTML = ""
 }
 
 function clearUL(){
@@ -42,6 +44,7 @@ function addClickToLinks(){
 
     document.getElementById('countryForm').addEventListener('click', displayCountryForm)
     document.getElementById('countries').addEventListener('click', getCountries)
+    document.querySelectorAll('#add-city').forEach(country => country.addEventListener('click', displayCityForm))
     document.querySelectorAll('#delete-city').forEach(city => city.addEventListener('click', deleteCity))
     document.querySelectorAll('#update-city').forEach(city => city.addEventListener('click', updateCity))
 }
@@ -58,7 +61,9 @@ function displayCountry(){
         const c = new Country(country)
         showCountry.innerHTML += c.renderCountry() 
         c.renderUL()
+        addClickToLinks()
     })
+    
 }
 
 // put country form on page
@@ -78,14 +83,17 @@ function displayCountryForm(){
 // put city form on page 
 function displayCityForm(){
     const cityFormDiv =  document.getElementById('city-form')
+    const countryId = Number(event.target.dataset.id)
+    console.log(countryId)
     const html = `
         <form>
             <label>Name:</label>
             <input type="text" id="name">
             <label>Must see:</label>
-            <input type="text" id="must_see>
+            <input type="text" id="must_see">
             <label>Visited?</label>
             <input type="checkbox" id="visited">
+            <input type="hidden" id="country_id" value="${countryId}">
             <input type="submit">
         </form>
     `
@@ -121,14 +129,39 @@ function createCountry(){
 
 // creates instance of city from form
 function createCity(){
+    event.preventDefault()
+    const city = {
+        name: document.getElementById('name').value,
+        must_see: document.getElementById('must_see').value,
+        visited: document.getElementById('visited').checked,
+        country_id: document.getElementById('country_id').value
+    }
+    console.log(city)
+    fetch(BASE_URL+"/cities", {
+        method: "POST",
+        body: JSON.stringify(city),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    .then(resp => resp.json())
+    .then(city => {
+           const c = new City(city)
+           console.log(c)
+           addClickToLinks()
+           clearForm()
+       })
     
 }
 
-function deleteCity(){
+//edit instance of city
+function updateCity(){
 
 }
 
-function updateCity(){
+// deletes instance of city
+function deleteCity(){
 
 }
 
@@ -164,3 +197,12 @@ class Country {
 }
 
 // begin City class
+class City {
+    constructor(city){
+    this.id = city.id
+    this.name = city.name
+    this.must_see = city.must_see
+    this.visited = city.visited
+    this.country_id = city.country_id
+    }
+}
