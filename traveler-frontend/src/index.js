@@ -42,6 +42,8 @@ function addClickToLinks(){
 
     document.getElementById('countryForm').addEventListener('click', displayCountryForm)
     document.getElementById('countries').addEventListener('click', getCountries)
+    document.querySelectorAll('#delete-city').forEach(city => city.addEventListener('click', deleteCity))
+    document.querySelectorAll('#update-city').forEach(city => city.addEventListener('click', updateCity))
 }
 
 // display instance of country
@@ -57,8 +59,6 @@ function displayCountry(){
         showCountry.innerHTML += c.renderCountry() 
         c.renderUL()
     })
-    const btn = `<button>Add City</button>`
-    showCountry.innerHTML = btn.addEventListener('click', displayCityForm)
 }
 
 // put country form on page
@@ -77,6 +77,20 @@ function displayCountryForm(){
 
 // put city form on page 
 function displayCityForm(){
+    const cityFormDiv =  document.getElementById('city-form')
+    const html = `
+        <form>
+            <label>Name:</label>
+            <input type="text" id="name">
+            <label>Must see:</label>
+            <input type="text" id="must_see>
+            <label>Visited?</label>
+            <input type="checkbox" id="visited">
+            <input type="submit">
+        </form>
+    `
+    cityFormDiv.innerHTML = html 
+    document.querySelector('form').addEventListener('submit', createCity)
 
 }
 
@@ -110,6 +124,14 @@ function createCity(){
     
 }
 
+function deleteCity(){
+
+}
+
+function updateCity(){
+
+}
+
 // begin Country class
 class Country {
     constructor(country){
@@ -122,6 +144,7 @@ class Country {
         return `
         <li id="country-${this.id}">
             <a href="#" data-id="${this.id}">${this.name}</a>
+            <button id="add-city" data-id="${this.id}">Add City</button>
             <ul id="cities">
             </ul>
         </li>
@@ -132,7 +155,10 @@ class Country {
         const ul = document.querySelector(`li#country-${this.id} #cities`)
             this.cities.forEach(city => {
                 ul.innerHTML += `<li>${city.name} - ${city.must_see} - 
-                ${city.visited ? "Visited" : "Not Visited Yet"} </li>`
+                ${city.visited ? "Visited" : "Not Visited Yet"} 
+                <button id="delete-city" data-id="${city.id}">Delete</button>
+                <button id="update-city" data-id="${city.id}">Edit</button>
+                </li>`
             })
     }
 }
