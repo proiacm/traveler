@@ -202,12 +202,13 @@ function updateCity(){
     .then(resp => resp.json())
     .then(city => {
            const c = new City(city)
+           document.querySelector(`li#country-${id} #cities li`).innerHTML = c.renderCity()
            addClickToLinks()
            clearForm()
        })
 }
 
-// deletes instance of city
+// deletes instance of country
 function deleteCountry(){
     event.preventDefault()
     clearForm()
@@ -262,5 +263,14 @@ class City {
     this.must_see = city.must_see
     this.visited = city.visited
     this.country_id = city.country_id
+    }
+
+    renderCity(){
+        return `
+            <li>${this.name} - ${this.must_see} - 
+            ${this.visited ? "Visited" : "Not Visited Yet"} 
+            <button id="update-city" data-id="${this.id}">Edit</button>
+            </li>
+     `
     }
 }
