@@ -26,6 +26,7 @@ class CountriesController < ApplicationController
 
   # DELETE /countries/1
   def destroy
+    # binding.pry
     @country.destroy
   end
 
