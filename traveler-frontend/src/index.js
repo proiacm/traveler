@@ -45,7 +45,7 @@ function addClickToLinks(){
     document.getElementById('countryForm').addEventListener('click', displayCountryForm)
     document.getElementById('countries').addEventListener('click', getCountries)
     document.querySelectorAll('#add-city').forEach(country => country.addEventListener('click', displayCityForm))
-    document.querySelectorAll('#delete-city').forEach(city => city.addEventListener('click', deleteCity))
+    document.querySelectorAll('#delete-country').forEach(country => country.addEventListener('click', deleteCountry))
     document.querySelectorAll('#update-city').forEach(city => city.addEventListener('click', editCity))
 }
 
@@ -183,14 +183,37 @@ function editCity(){
 
 // update instance of city
 function updateCity(){
-
+    event.preventDefault()
+    const city = {
+        name: document.getElementById('name').value,
+        must_see: document.getElementById('must_see').value,
+        visited: document.getElementById('visited').checked,
+        country_id: document.getElementById('country_id').value
+    }
+    const id = event.target.dataset.id
+    fetch(BASE_URL+`/cities/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(city),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    .then(resp => resp.json())
+    .then(city => {
+           const c = new City(city)
+           addClickToLinks()
+           clearForm()
+       })
 }
 
 // deletes instance of city
-function deleteCity(){
+function deleteCountry(){
     event.preventDefault()
     clearForm()
-    fetch(BASE_URL+`/cities/${event.target.dataset.id}`, {
+    const id = event.target.dataset.id
+    console.log(id)
+    fetch(BASE_URL+`/countries/${id}`, {
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json',
@@ -213,6 +236,7 @@ class Country {
         <li id="country-${this.id}">
             <a href="#" data-id="${this.id}">${this.name}</a>
             <button id="add-city" data-id="${this.id}">Add City</button>
+            <button id="delete-country" data-id="${this.id}">Delete Country</button>
             <ul id="cities">
             </ul>
         </li>
@@ -224,7 +248,6 @@ class Country {
             this.cities.forEach(city => {
                 ul.innerHTML += `<li>${city.name} - ${city.must_see} - 
                 ${city.visited ? "Visited" : "Not Visited Yet"} 
-                <button id="delete-city" data-id="${city.id}">Delete</button>
                 <button id="update-city" data-id="${city.id}">Edit</button>
                 </li>`
             })
