@@ -1,14 +1,10 @@
 # Traveler
 
-Prerequisites:
-
-
+A Javascript SPA with Rails API.
+Keep track of destinations you want to travel to! 
+Once visited, update the destination(s) to show where you have been.  
 
 To try it run the following commands in your terminal:
-
-$ bundle install
-
-$ rails s
 
 $ open index.html
 
