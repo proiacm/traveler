@@ -46,7 +46,7 @@ function addClickToLinks(){
     document.getElementById('countries').addEventListener('click', getCountries)
     document.querySelectorAll('#add-city').forEach(country => country.addEventListener('click', displayCityForm))
     document.querySelectorAll('#delete-city').forEach(city => city.addEventListener('click', deleteCity))
-    document.querySelectorAll('#update-city').forEach(city => city.addEventListener('click', updateCity))
+    document.querySelectorAll('#update-city').forEach(city => city.addEventListener('click', editCity))
 }
 
 // display instance of country
@@ -155,14 +155,49 @@ function createCity(){
     
 }
 
-//edit instance of city
+//put edit form on page
+function editCity(){
+    event.preventDefault()
+    clearForm()
+    const id = event.target.dataset.id
+    fetch(BASE_URL+`/cities/${id}`)
+    .then(resp => resp.json())
+    .then(city => {
+        const cityFormDiv = document.getElementById('city-form')
+        const html = `
+        <form data-id="${id}">
+            <label>Name:</label>
+            <input type="text" id="name" value="${city.name}">
+            <label>Must see:</label>
+            <input type="text" id="must_see" value="${city.must_see}">
+            <label>Visited?</label>
+            <input type="checkbox" id="visited">
+            <input type="hidden" id="country_id" value="${id}">
+            <input type="submit">
+        </form>
+        `
+        cityFormDiv.innerHTML = html 
+        document.querySelector('form').addEventListener('submit', updateCity)
+    })
+}
+
+// update instance of city
 function updateCity(){
 
 }
 
 // deletes instance of city
 function deleteCity(){
-
+    event.preventDefault()
+    clearForm()
+    fetch(BASE_URL+`/cities/${event.target.dataset.id}`, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    .then(event.target.parentElement.remove())
 }
 
 // begin Country class
