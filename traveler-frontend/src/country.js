@@ -113,6 +113,7 @@ class Country {
                 ul.innerHTML += `<li id="city-${city.id}">${city.name} - ${city.must_see} - 
                 ${city.visited ? "Visited" : "Not Visited Yet"} 
                 <button id="update-city" data-id="${city.id}">Edit</button>
+                <button id="delete-city" data-id="${city.id}">Delete City</button>
                 </li>`
             })
     }

@@ -29,4 +29,5 @@ function addClickToLinks(){
     document.querySelectorAll('#add-city').forEach(country => country.addEventListener('click', displayCityForm))
     document.querySelectorAll('#delete-country').forEach(country => country.addEventListener('click', deleteCountry))
     document.querySelectorAll('#update-city').forEach(city => city.addEventListener('click', editCity))
+    document.querySelectorAll('#delete-city').forEach(city => city.addEventListener('click', deleteCity))
 }

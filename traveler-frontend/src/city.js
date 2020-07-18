@@ -2,7 +2,7 @@
 function displayCityForm(){
     const cityFormDiv =  document.getElementById('city-form')
     const countryId = Number(event.target.dataset.id)
-    console.log(countryId)
+    // console.log(countryId)
     const html = `
         <form>
             <label>Name:</label>
@@ -29,7 +29,7 @@ function createCity(){
         visited: document.getElementById('visited').checked,
         country_id: document.getElementById('country_id').value
     }
-    console.log(city)
+    // console.log(city)
     fetch(BASE_URL+"/cities", {
         method: "POST",
         body: JSON.stringify(city),
@@ -41,7 +41,7 @@ function createCity(){
     .then(resp => resp.json())
     .then(city => {
            const c = new City(city)
-           console.log(c)
+            console.log(c)
            c.renderCity()
            addClickToLinks()
            clearForm()
@@ -103,6 +103,22 @@ function updateCity(){
            addClickToLinks()
            clearForm()
        })
+}
+
+// deletes instance of city
+function deleteCity(){
+    event.preventDefault()
+    clearForm()
+    const id = event.target.dataset.id
+    console.log(id)
+    fetch(BASE_URL+`/cities/${id}`, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    .then(event.target.parentElement.remove())
 }
 
 // begin City class
