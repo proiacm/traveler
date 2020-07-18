@@ -110,7 +110,7 @@ class Country {
     renderUL(){
         const ul = document.querySelector(`li#country-${this.id} #cities`)
             this.cities.forEach(city => {
-                ul.innerHTML += `<li>${city.name} - ${city.must_see} - 
+                ul.innerHTML += `<li id="city-${city.id}">${city.name} - ${city.must_see} - 
                 ${city.visited ? "Visited" : "Not Visited Yet"} 
                 <button id="update-city" data-id="${city.id}">Edit</button>
                 </li>`

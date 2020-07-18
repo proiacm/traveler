@@ -16,7 +16,7 @@ class CitiesController < ApplicationController
   # POST /cities
   def create
     city = City.new(city_params)
-
+  
     if city.save
       render json: city, status: :created, location: city
     else
@@ -26,16 +26,12 @@ class CitiesController < ApplicationController
 
   # PATCH/PUT /cities/1
   def update
+    #  binding.pry
     if @city.update(city_params)
       render json: @city
     else
       render json: @city.errors, status: :unprocessable_entity
     end
-  end
-
-  # DELETE /cities/1
-  def destroy
-    @city.destroy
   end
 
   private

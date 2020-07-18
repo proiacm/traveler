@@ -42,6 +42,7 @@ function createCity(){
     .then(city => {
            const c = new City(city)
            console.log(c)
+           c.renderCity()
            addClickToLinks()
            clearForm()
        })
@@ -56,6 +57,7 @@ function editCity(){
     fetch(BASE_URL+`/cities/${id}`)
     .then(resp => resp.json())
     .then(city => {
+        // console.log(city.country.id)
         const cityFormDiv = document.getElementById('city-form')
         const html = `
         <form data-id="${id}">
@@ -65,7 +67,7 @@ function editCity(){
             <input type="text" id="must_see" value="${city.must_see}">
             <label>Visited?</label>
             <input type="checkbox" id="visited">
-            <input type="hidden" id="country_id" value="${id}">
+            <input type="hidden" id="country_id" value="${city.country.id}">
             <input type="submit">
         </form>
         `
@@ -84,6 +86,7 @@ function updateCity(){
         country_id: document.getElementById('country_id').value
     }
     const id = event.target.dataset.id
+    // console.log(id)
     fetch(BASE_URL+`/cities/${id}`, {
         method: "PATCH",
         body: JSON.stringify(city),
@@ -95,7 +98,8 @@ function updateCity(){
     .then(resp => resp.json())
     .then(city => {
            const c = new City(city)
-           document.querySelector(`li#country-${id} #cities li`).innerHTML = c.renderCity()
+           
+           document.querySelector(`li#country-${city.country.id} #cities li#city-${city.id}`).innerHTML = c.renderCity()
            addClickToLinks()
            clearForm()
        })
@@ -113,7 +117,7 @@ class City {
 
     renderCity(){
         return `
-            <li>${this.name} - ${this.must_see} - 
+            <li id="city-${this.id}">${this.name} - ${this.must_see} - 
             ${this.visited ? "Visited" : "Not Visited Yet"} 
             <button id="update-city" data-id="${this.id}">Edit</button>
             </li>
