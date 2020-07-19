@@ -39,8 +39,8 @@ function displayCountryForm(){
         <form>
             <label>Name:</label>
             <input type="text" id="name">
-            <input type="submit">
-        </form>
+            <input type="submit" class="button">
+        </form><br>
     `
     countryFormDiv.innerHTML = html 
     document.querySelector('form').addEventListener('submit', createCountry)
@@ -98,9 +98,9 @@ class Country {
     renderCountry(){
         return `
         <li id="country-${this.id}">
-            <a href="#" data-id="${this.id}">${this.name}</a>
-            <button id="add-city" data-id="${this.id}">Add City</button>
-            <button id="delete-country" data-id="${this.id}">Delete Country</button>
+            <a href="#" data-id="${this.id}">${this.name}</a> &#10518; 
+            <a href="#" id="add-city" data-id="${this.id}">Add City</a> | 
+            <a href="#" id="delete-country" data-id="${this.id}">Delete Country</a>
             <ul id="cities">
             </ul>
         </li>
@@ -110,11 +110,12 @@ class Country {
     renderUL(){
         const ul = document.querySelector(`li#country-${this.id} #cities`)
             this.cities.forEach(city => {
-                ul.innerHTML += `<li id="city-${city.id}">${city.name} - ${city.must_see} - 
+                ul.innerHTML += `<br><li id="city-${city.id}">${city.name} - ${city.must_see} - 
                 ${city.visited ? "Visited" : "Not Visited Yet"} 
-                <button id="update-city" data-id="${city.id}">Edit</button>
-                <button id="delete-city" data-id="${city.id}">Delete City</button>
+                <a href="#" id="update-city" data-id="${city.id}">Edit</a> |
+                <a href="#" id="delete-city" data-id="${city.id}">Delete</a>
                 </li>`
             })
+            ul.innerHTML += '<hr><br>'
     }
 }

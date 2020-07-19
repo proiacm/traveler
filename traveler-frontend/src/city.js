@@ -12,8 +12,8 @@ function displayCityForm(){
             <label>Visited?</label>
             <input type="checkbox" id="visited">
             <input type="hidden" id="country_id" value="${countryId}">
-            <input type="submit">
-        </form>
+            <input type="submit" class="button">
+        </form><br>
     `
     cityFormDiv.innerHTML = html 
     document.querySelector('form').addEventListener('submit', createCity)
@@ -41,6 +41,7 @@ function createCity(){
     .then(resp => resp.json())
     .then(city => {
            const c = new City(city)
+           console.log(city)
             console.log(c)
            c.renderCity()
            addClickToLinks()
@@ -68,8 +69,8 @@ function editCity(){
             <label>Visited?</label>
             <input type="checkbox" id="visited">
             <input type="hidden" id="country_id" value="${city.country.id}">
-            <input type="submit">
-        </form>
+            <input type="submit" class="button">
+        </form><br>
         `
         cityFormDiv.innerHTML = html 
         document.querySelector('form').addEventListener('submit', updateCity)
