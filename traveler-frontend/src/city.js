@@ -136,8 +136,8 @@ class City {
         return `
             <li id="city-${this.id}"> ${this.name} - ${this.must_see} - 
             ${this.visited ? "Visited" : "Not Visited Yet"} 
-            <button id="update-city" data-id="${this.id}">Edit</button> |
-            <button id="delete-city" data-id="${this.id}">Delete</button>
+            <button id="update-city" class="button" data-id="${this.id}">Edit</button> |
+            <button id="delete-city" class="button" data-id="${this.id}">Delete</button>
             </li>
         `
     }

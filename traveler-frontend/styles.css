@@ -36,6 +36,15 @@
       opacity: 90%;
       border-radius: 4px;
     }
+
+    .button {
+      color: rgb(40, 94, 62);
+      background-color: rgb(236, 234, 232);
+      font-family: 'Amatic SC', cursive; 
+      font-weight: bold;
+      font-size: 23px;
+      width: auto;
+    }
   
     a {
       color: rgb(40, 94, 62);

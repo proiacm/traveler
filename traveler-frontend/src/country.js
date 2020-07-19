@@ -102,7 +102,7 @@ class Country {
         <li id="country-${this.id}">
             <a href="#" data-id="${this.id}">${this.name}</a> &#10518; 
             <a href="#" id="add-city" data-id="${this.id}">Add City</a> | 
-            <button id="delete-country" data-id="${this.id}">Delete Country</button>
+            <button id="delete-country" class="button" data-id="${this.id}">Delete Country</button>
             <ul id="cities">
             </ul>
         </li>
@@ -114,8 +114,8 @@ class Country {
             this.cities.forEach(city => {
                 ul.innerHTML += `<br><li id="city-${city.id}">${city.name} | Must see: ${city.must_see} |
                 ${city.visited ? "Visited" : "Not Visited Yet"} 
-                <button id="update-city" data-id="${city.id}">Edit</button> |
-                <button id="delete-city" data-id="${city.id}">Delete</button>
+                <button id="update-city" class="button" data-id="${city.id}">Edit</button> |
+                <button id="delete-city" class="button" data-id="${city.id}">Delete</button>
                 </li>`
             })
             ul.innerHTML += '<hr><br>'
