@@ -40,7 +40,7 @@ function createCity(){
     })
     .then(resp => resp.json())
     .then(city => {
-           const c = new City(city)
+           let c = new City(city)
         //    console.log(city)
         //     console.log(c)
            const showCity = document.querySelector(`ul#cities`) 
@@ -99,8 +99,7 @@ function updateCity(){
     })
     .then(resp => resp.json())
     .then(city => {
-           const c = new City(city)
-           
+           let c = new City(city)
            document.querySelector(`li#country-${city.country.id} #cities li#city-${city.id}`).innerHTML = c.renderCity()
            addClickToLinks()
            clearForm()
@@ -135,7 +134,7 @@ class City {
 
     renderCity(){
         return `
-            <li id="city-${this.id}">${this.name} - ${this.must_see} - 
+            <li id="city-${this.id}"> ${this.name} - ${this.must_see} - 
             ${this.visited ? "Visited" : "Not Visited Yet"} 
             <button id="update-city" data-id="${this.id}">Edit</button> |
             <button id="delete-city" data-id="${this.id}">Delete</button>

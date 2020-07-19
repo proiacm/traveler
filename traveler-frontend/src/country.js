@@ -21,11 +21,11 @@ function displayCountry(){
     clearUL()
     const id = event.target.dataset.id 
     const showCountry = document.getElementById('show-country')
-    console.log(id)
+    // console.log(id)
     fetch(BASE_URL+"/countries/"+id)
     .then(resp => resp.json())
     .then(country => {
-        const c = new Country(country)
+        let c = new Country(country)
         showCountry.innerHTML += c.renderCountry() 
         c.renderUL()
         addClickToLinks()
@@ -35,6 +35,7 @@ function displayCountry(){
 
 // render country form on page
 function displayCountryForm(){
+    clearUL()
     const countryFormDiv =  document.getElementById('country-form')
     const html = `
         <form>
@@ -63,7 +64,7 @@ function createCountry(){
     })
     .then(resp => resp.json())
     .then(country => {
-           const c = new Country(country)
+           let c = new Country(country)
            const showCountries = document.querySelector('#show-countries ul')
            showCountries.innerHTML += c.renderCountry() 
            c.renderUL()
