@@ -7,7 +7,7 @@ function getCountries(){
     .then(resp => resp.json())
     .then(countries => {
         countries.forEach(country => {
-           const c = new Country(country)
+           let c = new Country(country)
            showCountries.innerHTML += c.renderCountry() 
            c.renderUL()
        })
@@ -21,6 +21,7 @@ function displayCountry(){
     clearUL()
     const id = event.target.dataset.id 
     const showCountry = document.getElementById('show-country')
+    console.log(id)
     fetch(BASE_URL+"/countries/"+id)
     .then(resp => resp.json())
     .then(country => {
@@ -73,10 +74,10 @@ function createCountry(){
 
 // deletes instance of country
 function deleteCountry(){
-    event.preventDefault()
     clearForm()
+    event.preventDefault()
+    // console.log(event.target.parentElement)
     const id = event.target.dataset.id
-    console.log(id)
     fetch(BASE_URL+`/countries/${id}`, {
         method: "DELETE",
         headers: {
@@ -100,7 +101,7 @@ class Country {
         <li id="country-${this.id}">
             <a href="#" data-id="${this.id}">${this.name}</a> &#10518; 
             <a href="#" id="add-city" data-id="${this.id}">Add City</a> | 
-            <a href="#" id="delete-country" data-id="${this.id}">Delete Country</a>
+            <button id="delete-country" data-id="${this.id}">Delete Country</button>
             <ul id="cities">
             </ul>
         </li>
@@ -110,10 +111,10 @@ class Country {
     renderUL(){
         const ul = document.querySelector(`li#country-${this.id} #cities`)
             this.cities.forEach(city => {
-                ul.innerHTML += `<br><li id="city-${city.id}">${city.name} - ${city.must_see} - 
+                ul.innerHTML += `<br><li id="city-${city.id}">${city.name} | Must see: ${city.must_see} |
                 ${city.visited ? "Visited" : "Not Visited Yet"} 
-                <a href="#" id="update-city" data-id="${city.id}">Edit</a> |
-                <a href="#" id="delete-city" data-id="${city.id}">Delete</a>
+                <button id="update-city" data-id="${city.id}">Edit</button> |
+                <button id="delete-city" data-id="${city.id}">Delete</button>
                 </li>`
             })
             ul.innerHTML += '<hr><br>'

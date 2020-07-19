@@ -2,8 +2,17 @@ const BASE_URL = 'http://localhost:3000'
 
 //start program
 window.addEventListener('load', () => {
-    getCountries()
+     homePage()
 })
+
+function homePage(){
+    clearForm()
+    clearUL()
+    addClickToLinks()
+    const home = document.getElementById('home')
+    home.innerHTML = "I'm in homepage!"
+    
+}
 
 function clearForm(){
     const countryFormDiv = document.getElementById('country-form')
@@ -17,6 +26,8 @@ function clearUL(){
     showCountries.innerHTML = ""
     const showCountry = document.querySelector('#show-country')
     showCountry.innerHTML = ""
+    const home = document.querySelector('#home')
+    home.innerHTML = ""
 }
 
 function addClickToLinks(){
@@ -24,6 +35,7 @@ function addClickToLinks(){
     countriesLinks.forEach(link => {
         link.addEventListener('click', displayCountry)
     })
+    document.getElementById('home-page').addEventListener('click', homePage)
     document.getElementById('countryForm').addEventListener('click', displayCountryForm)
     document.getElementById('countries').addEventListener('click', getCountries)
     document.querySelectorAll('#add-city').forEach(country => country.addEventListener('click', displayCityForm))

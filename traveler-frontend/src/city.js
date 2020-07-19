@@ -41,9 +41,10 @@ function createCity(){
     .then(resp => resp.json())
     .then(city => {
            const c = new City(city)
-           console.log(city)
-            console.log(c)
-           c.renderCity()
+        //    console.log(city)
+        //     console.log(c)
+           const showCity = document.querySelector(`ul#cities`) 
+           showCity.innerHTML += c.renderCity()
            addClickToLinks()
            clearForm()
        })
@@ -129,14 +130,15 @@ class City {
     this.name = city.name
     this.must_see = city.must_see
     this.visited = city.visited
-    this.country_id = city.country_id
+    this.country_id = city.country.id
     }
 
     renderCity(){
         return `
             <li id="city-${this.id}">${this.name} - ${this.must_see} - 
             ${this.visited ? "Visited" : "Not Visited Yet"} 
-            <button id="update-city" data-id="${this.id}">Edit</button>
+            <button id="update-city" data-id="${this.id}">Edit</button> |
+            <button id="delete-city" data-id="${this.id}">Delete</button>
             </li>
         `
     }
