@@ -1,11 +1,9 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:update, :destroy]
+  before_action :set_city, only: [:show, :update, :destroy]
 
-  # GET /cities
-  def index
-    cities = City.all
-
-    render json: cities
+  # GET /cities/1
+  def show
+    render json: @city
   end
 
   # POST /cities
