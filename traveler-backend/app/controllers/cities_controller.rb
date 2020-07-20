@@ -1,5 +1,5 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :update, :destroy]
+  before_action :set_city, only: [:update, :destroy]
 
   # GET /cities
   def index
