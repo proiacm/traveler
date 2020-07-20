@@ -8,11 +8,6 @@ class CitiesController < ApplicationController
     render json: cities
   end
 
-  # GET /cities/1
-  def show
-    render json: @city
-  end
-
   # POST /cities
   def create
     city = City.new(city_params)
