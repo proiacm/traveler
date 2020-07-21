@@ -10,7 +10,7 @@ function homePage(){
     clearUL()
     addClickToLinks()
     const home = document.getElementById('home')
-    home.innerHTML = "Welcome to Traveler! An app where you can plan and manage your travel bucket list. <br> Start by setting a country and adding cities you'd like to visit. <br> You can return to this page at any time by clicking 'Traveler'."
+    home.innerHTML = "Welcome Traveler! An app where you can plan and manage your travel bucket list. <br> Start by setting a country and adding cities you'd like to visit. <br> You can return to this page at any time by clicking 'Traveler'."
 }
 
 function clearForm(){
@@ -30,7 +30,7 @@ function clearUL(){
 }
 
 function addClickToLinks(){
-    const countriesLinks = document.querySelectorAll('li a')
+    const countriesLinks = document.querySelectorAll('#display-country')
     countriesLinks.forEach(link => {
         link.addEventListener('click', displayCountry)
     })

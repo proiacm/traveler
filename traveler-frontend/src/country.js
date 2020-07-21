@@ -76,7 +76,6 @@ function createCountry(){
 // deletes instance of country
 function deleteCountry(){
     clearForm()
-    event.preventDefault()
     // console.log(event.target.parentElement)
     const id = event.target.dataset.id
     fetch(BASE_URL+`/countries/${id}`, {
@@ -100,9 +99,9 @@ class Country {
     renderCountry(){
         return `
         <li id="country-${this.id}">
-            <a href="#" data-id="${this.id}">${this.name}</a> &#10518; 
+            <a href="#" id="display-country" data-id="${this.id}">${this.name}</a> &#10518; 
             <a href="#" id="add-city" data-id="${this.id}">Add City</a> | 
-            <button id="delete-country" class="button" data-id="${this.id}">Delete Country</button>
+            <a href="#" id="delete-country" data-id="${this.id}">Delete Country</a>
             <ul id="cities">
             </ul>
         </li>
@@ -114,8 +113,8 @@ class Country {
             this.cities.forEach(city => {
                 ul.innerHTML += `<br><li id="city-${city.id}">${city.name} | Must see: ${city.must_see} |
                 ${city.visited ? "Visited" : "Not Visited Yet"} 
-                <button id="update-city" class="button" data-id="${city.id}">Edit</button> |
-                <button id="delete-city" class="button" data-id="${city.id}">Delete</button>
+                <a href="#" id="update-city" data-id="${city.id}">Edit</a> |
+                <a href="#" id="delete-city" data-id="${city.id}">Delete</a>
                 </li>`
             })
             ul.innerHTML += '<hr><br>'

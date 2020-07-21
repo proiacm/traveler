@@ -1,5 +1,5 @@
 // render city form on page 
-function displayCityForm(){
+function displayCityForm() {
     const cityFormDiv =  document.getElementById('city-form')
     const countryId = Number(event.target.dataset.id)
     // console.log(countryId)
@@ -21,7 +21,7 @@ function displayCityForm(){
 }
 
 // creates instance of city from form data
-function createCity(){
+function createCity() {
     event.preventDefault()
     const city = {
         name: document.getElementById('name').value,
@@ -108,7 +108,6 @@ function updateCity(){
 
 // deletes instance of city
 function deleteCity(){
-    event.preventDefault()
     clearForm()
     const id = event.target.dataset.id
     console.log(id)
@@ -125,19 +124,19 @@ function deleteCity(){
 // begin City class
 class City {
     constructor(city){
-    this.id = city.id
-    this.name = city.name
-    this.must_see = city.must_see
-    this.visited = city.visited
-    this.country_id = city.country.id
+        this.id = city.id
+        this.name = city.name
+        this.must_see = city.must_see
+        this.visited = city.visited
+        this.country_id = city.country.id
     }
 
     renderCity(){
         return `
             <li id="city-${this.id}"> ${this.name} - ${this.must_see} - 
             ${this.visited ? "Visited" : "Not Visited Yet"} 
-            <button id="update-city" class="button" data-id="${this.id}">Edit</button> |
-            <button id="delete-city" class="button" data-id="${this.id}">Delete</button>
+            <a href="#" id="update-city" data-id="${this.id}">Edit</a> |
+            <a href="#" id="delete-city" data-id="${this.id}">Delete</a>
             </li>
         `
     }
