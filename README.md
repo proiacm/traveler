@@ -1,4 +1,4 @@
-#Traveler
+# Traveler
 Traveler is a Single Page App that lets wanderers to track destinations.
 
 To use Traveler, follow these steps:
